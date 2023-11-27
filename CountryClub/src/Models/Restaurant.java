@@ -1,9 +1,10 @@
 package Models;
 
+import java.io.Serializable;
 import BaseClasses.CapacityCheckinBase;
 import Interfaces.ICountryClubFacility;
 
-public class Restaurant extends CapacityCheckinBase implements ICountryClubFacility {
+public class Restaurant extends CapacityCheckinBase implements ICountryClubFacility, Serializable {
     private final String welcomeMessage = "Welcome to Country Club Restaurant facility!";
     private final String hoursOfOperation = "Mon: 11:00AM - 11:00PM\nTues 11:00AM - 11:00PM\\nWend:11:00AM - 11:00PM\nThurs:11:00AM - 11:00PM\nFri:11:00AM - 11:00PM\nSat:11:00AM - 11:00PM\nSun:Closed";
 

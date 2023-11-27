@@ -14,6 +14,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class CountryClub implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     public Gym gym;
     public Pool pool;
     public Restaurant restaurant;

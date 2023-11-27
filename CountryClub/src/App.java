@@ -23,6 +23,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         theCountryClub = new CountryClub();
         initializeMembers();
+        theCountryClub.Serialize();
         Member member = obtainMemberDetails();
         if (member != null) {
             if (member.getNumber() == 1){
@@ -35,13 +36,13 @@ public class App {
                     if (adminUserResponse != null) {
                         switch (adminUserResponse) {
                             case Gym:
-                                theCountryClub.gym.Checkin(member);
+                                theCountryClub.gym.ListCheckedInMembers();
                                 break;
                             case Pool:
-                                theCountryClub.pool.Checkin(member);
+                                theCountryClub.pool.ListCheckedInMembers();
                                 break;
                             case RestaurantCheckin:
-                                theCountryClub.restaurant.Checkin(member);
+                                theCountryClub.restaurant.ListCheckedInMembers();
                                 break;
                             default:
                                 break;
