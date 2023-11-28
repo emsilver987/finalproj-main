@@ -23,9 +23,13 @@ public class App {
     private final static String adminMessgae ="What facility would you like to view the checked-in members?\nGym = 1\nPool = 2\nRestaurant = 3";
 
     public static void main(String[] args) throws Exception {
-        theCountryClub = new CountryClub();
-        initializeMembers();
-        theCountryClub.Serialize();
+        if (theCountryClub == null) {
+        theCountryClub = CountryClub.Deserialize();
+            if (theCountryClub == null) {
+                theCountryClub = new CountryClub();
+                initializeMembers();
+            }
+        }
         Member member = obtainMemberDetails();
         theCountryClub.Serialize();
         if (member != null) {
@@ -39,16 +43,13 @@ public class App {
                     if (adminUserResponse != null) {
                         switch (adminUserResponse) {
                             case Gym:
-                                theCountryClub.gym.ListCheckedInMembers();
-                                theCountryClub.Serialize();
+                                System.out.print(theCountryClub.gym.ListCheckedInMembers());
                                 break;
                             case Pool:
-                                theCountryClub.pool.ListCheckedInMembers();
-                                theCountryClub.Serialize();
+                                System.out.print(theCountryClub.pool.ListCheckedInMembers());
                                 break;
                             case RestaurantCheckin:
-                                theCountryClub.restaurant.ListCheckedInMembers();
-                                theCountryClub.Serialize();
+                                System.out.print(theCountryClub.restaurant.ListCheckedInMembers());
                                 break;
                             default:
                                 break;
@@ -71,7 +72,7 @@ public class App {
     }
 
     private static void initializeMembers() {
-        list.addAll(Arrays.asList(
+            list.addAll(Arrays.asList(
             new Member(1, "Charles Rodriguez"),
             new Member(2, "Thomas Davis"),
             new Member(3, "John Hernandez"),
@@ -190,15 +191,15 @@ public class App {
             System.out.println("Hello " + member.getName() + " (Member " + member.getNumber() + "), Welcome to the " + userResponse);
             switch (userResponse) {
                 case Gym:
-                    theCountryClub.gym.Checkin(member);
+                    System.out.print(theCountryClub.gym.Checkin(member));
                     theCountryClub.Serialize();
                     break;
                 case Pool:
-                    theCountryClub.pool.Checkin(member);
+                    System.out.print(theCountryClub.pool.Checkin(member));
                     theCountryClub.Serialize();
                     break;
                 case RestaurantCheckin:
-                    theCountryClub.restaurant.Checkin(member);
+                    System.out.print(theCountryClub.restaurant.Checkin(member));
                     theCountryClub.Serialize();
                     break;
                 case RestaurantReservation:
@@ -206,7 +207,7 @@ public class App {
                     int howManyInPartyint = scanner.nextInt();
                     reservationDate();
                     int reservationDate = scanner.nextInt();
-                    theCountryClub.restaurant.MakeReservation(reservationDate, member, howManyInPartyint);
+                    System.out.print(theCountryClub.restaurant.MakeReservation(reservationDate, member, howManyInPartyint));
                     theCountryClub.Serialize();
                     break;
             }

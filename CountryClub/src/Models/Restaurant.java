@@ -28,7 +28,8 @@ public class Restaurant extends CapacityCheckinBase implements ICountryClubFacil
         return hoursOfOperation;
     }
 
-    public void MakeReservation(int reservationDate, Member member, int howManyInPartyint) {
+    public String MakeReservation(int reservationDate, Member member, int howManyInPartyint) {
+        return "Success";
     }
 
 }
