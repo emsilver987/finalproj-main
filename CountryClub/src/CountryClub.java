@@ -26,19 +26,19 @@ public class CountryClub implements Serializable {
         restaurant = new Restaurant(30);
     }
     public void Serialize() throws FileNotFoundException, IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("CountryClub\\CountryClubState"));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("C:\\Users\\emsil\\Downloads\\finalproj-main (1)\\finalproj-main\\CountryClub\\CountryClubCheckinState"));
         out.writeObject(this);
         out.flush();
         out.close();
     }
 
     public static CountryClub Deserialize() throws FileNotFoundException, IOException, ClassNotFoundException {
-        File f = new File("CountryClubState");
+        File f = new File("C:\\Users\\emsil\\Downloads\\finalproj-main (1)\\finalproj-main\\CountryClub\\CountryClubCheckinState");
         if (f.exists() && !f.isDirectory()) {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("CountryClub\\\\CountryClubState"));
-            final CountryClub restoredOwner = (CountryClub) in.readObject();
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("C:\\Users\\emsil\\Downloads\\finalproj-main (1)\\finalproj-main\\CountryClub\\CountryClubCheckinState"));
+            final CountryClub restored = (CountryClub) in.readObject();
             in.close();
-            return restoredOwner;
+            return restored;
         }
         return null;
 

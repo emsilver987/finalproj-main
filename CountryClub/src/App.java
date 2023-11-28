@@ -29,10 +29,10 @@ public class App {
         Member member = obtainMemberDetails();
         theCountryClub.Serialize();
         if (member != null) {
-            if (member.getNumber() == 1){
+            if (member.getNumber() == 1) {
                 adminLoginFunc();
                 int adminPassword = scanner.nextInt();
-                if (adminPassword == 12345){
+                if (adminPassword == 12345) {
                     adminMessgaeFunc();
                     int adminChoice = scanner.nextInt();
                     Response adminUserResponse = Response.fromInt(adminChoice);
@@ -52,16 +52,19 @@ public class App {
                                 break;
                             default:
                                 break;
-            }
-        } else {
-            System.out.println("Invalid response");
-        }
+                        }
+                    } else {
+                        System.out.println("Invalid response");
+                    }
                     Gym thegym = new Gym(10);
                     thegym.ListCheckedInMembers();
                     theCountryClub.Serialize();
+                } else {
+                    System.out.println("Incorrect admin password.");
                 }
+            } else {
+                FacilityChoice(member);
             }
-            FacilityChoice(member);
         } else {
             System.out.println("Member not found.");
         }
@@ -256,5 +259,4 @@ public class App {
         System.out.println(adminMessgae);
     }
 }
-
 
