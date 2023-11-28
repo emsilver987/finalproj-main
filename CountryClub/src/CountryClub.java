@@ -15,7 +15,7 @@ import java.io.ObjectOutputStream;
 
 public class CountryClub implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     public Gym gym;
     public Pool pool;
     public Restaurant restaurant;
@@ -26,16 +26,16 @@ public class CountryClub implements Serializable {
         restaurant = new Restaurant(30);
     }
     public void Serialize() throws FileNotFoundException, IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("CountryClubState"));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("CountryClub\\CountryClubState"));
         out.writeObject(this);
         out.flush();
         out.close();
     }
 
-    public static CountryClub DeserializeOwner() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static CountryClub Deserialize() throws FileNotFoundException, IOException, ClassNotFoundException {
         File f = new File("CountryClubState");
         if (f.exists() && !f.isDirectory()) {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("CountryClubState"));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("CountryClub\\\\CountryClubState"));
             final CountryClub restoredOwner = (CountryClub) in.readObject();
             in.close();
             return restoredOwner;

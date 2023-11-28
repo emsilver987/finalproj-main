@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +27,7 @@ public class App {
         initializeMembers();
         theCountryClub.Serialize();
         Member member = obtainMemberDetails();
+        theCountryClub.Serialize();
         if (member != null) {
             if (member.getNumber() == 1){
                 adminLoginFunc();
@@ -37,12 +40,15 @@ public class App {
                         switch (adminUserResponse) {
                             case Gym:
                                 theCountryClub.gym.ListCheckedInMembers();
+                                theCountryClub.Serialize();
                                 break;
                             case Pool:
                                 theCountryClub.pool.ListCheckedInMembers();
+                                theCountryClub.Serialize();
                                 break;
                             case RestaurantCheckin:
                                 theCountryClub.restaurant.ListCheckedInMembers();
+                                theCountryClub.Serialize();
                                 break;
                             default:
                                 break;
@@ -52,6 +58,7 @@ public class App {
         }
                     Gym thegym = new Gym(10);
                     thegym.ListCheckedInMembers();
+                    theCountryClub.Serialize();
                 }
             }
             FacilityChoice(member);
@@ -172,7 +179,7 @@ public class App {
         return theCountryClub.Members.stream().filter(m -> m.getNumber() == memberNumber).findFirst().orElse(null);
     }
 
-    public static void FacilityChoice(Member member) {
+    public static void FacilityChoice(Member member) throws FileNotFoundException, IOException {
         facilityChoicePrintFunction();
         int facilityChoice = scanner.nextInt();
         Response userResponse = Response.fromInt(facilityChoice);
@@ -181,12 +188,15 @@ public class App {
             switch (userResponse) {
                 case Gym:
                     theCountryClub.gym.Checkin(member);
+                    theCountryClub.Serialize();
                     break;
                 case Pool:
                     theCountryClub.pool.Checkin(member);
+                    theCountryClub.Serialize();
                     break;
                 case RestaurantCheckin:
                     theCountryClub.restaurant.Checkin(member);
+                    theCountryClub.Serialize();
                     break;
                 case RestaurantReservation:
                     howMany();
@@ -194,6 +204,7 @@ public class App {
                     reservationDate();
                     int reservationDate = scanner.nextInt();
                     theCountryClub.restaurant.MakeReservation(reservationDate, member, howManyInPartyint);
+                    theCountryClub.Serialize();
                     break;
             }
         } else {
