@@ -21,6 +21,13 @@ MAIN_CLASS = App
 # Phony targets for make commands
 .PHONY: all run run-exception clean
 
+# Detect the operating system and set the appropriate clean command
+ifeq ($(OS),Windows_NT)
+	CLEAN_COMMAND = rmdir /s /q $(BUILD_DIR)
+else
+	CLEAN_COMMAND = rm -rf $(BUILD_DIR)
+endif
+
 # Default target
 all: $(CLASS_FILES)
 	@echo "Compilation completed."
@@ -39,4 +46,4 @@ run: all
 
 # Rule to clean the build directory
 clean:
-	rm -rf $(BUILD_DIR)
+	$(CLEAN_COMMAND)
