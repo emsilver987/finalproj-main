@@ -219,8 +219,7 @@ public class App {
                     int foodChoice = scanner.nextInt();
                     System.out.println(theCountryClub.restaurant.quantity());
                     int quantity = scanner.nextInt();
-
-                    theCountryClub.Serialize();
+                    System.out.println(theCountryClub.restaurant.order(foodChoice, quantity));
                     break;
             }
         } else {
