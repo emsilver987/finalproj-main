@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,12 +59,14 @@ public class App {
                         }
                     } else {
                         System.out.println("Invalid response, Please enter one of the Specfied Numbers.");
+                        main(null);
                     }
                     Gym thegym = new Gym(10);
                     thegym.ListCheckedInMembers();
                     theCountryClub.Serialize();
                 } else {
                     System.out.println("Incorrect admin password. Please log-in again");
+                    main(null);
                 }
             } else {
                 FacilityChoice(member);
@@ -189,7 +189,7 @@ public class App {
         return theCountryClub.Members.stream().filter(m -> m.getNumber() == memberNumber).findFirst().orElse(null);
     }
 
-    public static void FacilityChoice(Member member) throws FileNotFoundException, IOException {
+    public static void FacilityChoice(Member member) throws Exception {
         facilityChoicePrintFunction();
         int facilityChoice = scanner.nextInt();
         Response userResponse = Response.fromInt(facilityChoice);
@@ -202,13 +202,16 @@ public class App {
                     if (gymChoice == 1){
                         System.out.print(theCountryClub.gym.Checkin(member));
                         theCountryClub.Serialize();
+                        main(null);
                     }
                     if (gymChoice == 2){
                         System.out.print(theCountryClub.gym.Checkout(member));
                         theCountryClub.Serialize();
+                        main(null);
                     }
                     if (gymChoice == 3){
                         System.out.print(theCountryClub.gym.WorkHours());
+                        main(null);
                     }
                     break;
                 case Pool:
@@ -217,13 +220,16 @@ public class App {
                     if (poolChoice == 1){
                         System.out.print(theCountryClub.pool.Checkin(member));
                         theCountryClub.Serialize();
+                        main(null);
                     }
                     if (poolChoice == 2){
                         System.out.print(theCountryClub.pool.Checkout(member));
                         theCountryClub.Serialize();
+                        main(null);
                     }
                     if (poolChoice == 3){
                         System.out.print(theCountryClub.pool.WorkHours());
+                        main(null);
                     }
                     break;
                 case RestaurantCheckin:
@@ -232,13 +238,16 @@ public class App {
                     if (restaurantChoice == 1){
                         System.out.print(theCountryClub.pool.Checkin(member));
                         theCountryClub.Serialize();
+                        main(null);
                     }
                     if (restaurantChoice == 2){
                         System.out.print(theCountryClub.restaurant.Checkout(member));
                         theCountryClub.Serialize();
+                        main(null);
                     }
                     if (restaurantChoice == 3){
                         System.out.print(theCountryClub.restaurant.WorkHours());
+                        main(null);
                     }
                     break;
                 case RestaurantReservation:
@@ -248,6 +257,7 @@ public class App {
                     int reservationDate = scanner.nextInt();
                     System.out.print(theCountryClub.restaurant.MakeReservation(reservationDate, member, howManyInPartyint));
                     theCountryClub.Serialize();
+                    main(null);
                     break;
                 case OrderTakeout:
                     System.out.println(theCountryClub.restaurant.menuOptions());
@@ -255,6 +265,7 @@ public class App {
                     System.out.println(theCountryClub.restaurant.quantity());
                     int quantity = scanner.nextInt();
                     System.out.println(theCountryClub.restaurant.order(foodChoice, quantity));
+                    main(null);
                     break;
             }
         }
@@ -307,6 +318,9 @@ public class App {
     }
     public static void adminMessgaeFunc() {
         System.out.println(adminMessgae);
+    }
+    public void adminLogin(){
+
     }
 }
 
