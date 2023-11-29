@@ -5,10 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import BaseClasses.CapacityCheckinBase;
 import Models.Gym;
-import Models.Pool;
-import Models.Restaurant;
 import Models.Member;
 
 public class App {
@@ -43,13 +40,19 @@ public class App {
                     if (adminUserResponse != null) {
                         switch (adminUserResponse) {
                             case Gym:
-                                System.out.print(theCountryClub.gym.ListCheckedInMembers());
+                                System.err.println(theCountryClub.gym.WelcomeMessage());
+                                System.err.println(theCountryClub.gym.WorkHours());
+                                System.out.print("The current checked in members include:\n" + theCountryClub.gym.ListCheckedInMembers());
                                 break;
                             case Pool:
-                                System.out.print(theCountryClub.pool.ListCheckedInMembers());
+                                System.err.println(theCountryClub.pool.WelcomeMessage());
+                                System.err.println(theCountryClub.pool.WorkHours());
+                                System.out.print("The current checked in members include:\n" + theCountryClub.pool.ListCheckedInMembers());
                                 break;
                             case RestaurantCheckin:
-                                System.out.print(theCountryClub.restaurant.ListCheckedInMembers());
+                                System.err.println(theCountryClub.restaurant.WelcomeMessage());
+                                System.err.println(theCountryClub.restaurant.WorkHours());
+                                System.out.print("The current checked in members include:\n" + theCountryClub.restaurant.ListCheckedInMembers());
                                 break;
                             default:
                                 break;
