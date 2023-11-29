@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class Pool extends CapacityCheckinBase implements ICountryClubFacility, Serializable {
     private final String welcomeMessage = "Welcome to Country Club Pool facility!";
-    private final String hoursOfOperation = "Mon: 9:00AM - 11:00PM\nTues:9:00AM - 11:00PM\nWend:9:00AM - 11:00PM\nThurs:9:00AM - 11:00PM\nFri:9:00AM - 11:00PM\nSat:11:00AM - 11:00PM\nSun:Closed";
+    private final String hoursOfOperation = "Mon: 9:00AM - 11:00PM\nTues:9:00AM - 11:00PM\nWend:9:00AM - 11:00PM\nThurs:9:00AM - 11:00PM\nFri:9:00AM - 11:00PM\nSat:11:00AM - 11:00PM\nSun:Closed\n";
     private final String optionsString = "What would you like to do today\n1 - Check in\n2 - Check out\n3 - See Hours\n";
 
     public Pool(int capacity)

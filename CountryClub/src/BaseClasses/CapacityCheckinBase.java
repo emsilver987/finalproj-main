@@ -40,13 +40,13 @@ public class CapacityCheckinBase implements ICheckin, Serializable {
     }
 
     public String Checkout(Member member) {
-            if (checkedInMembers.remove(member) == false){
-                currentCapacity--;
-                return "Successfully Checked-out\n";
-            }
-            else{
-                return "You are not checked-in\n";
-            }
+        if (checkedInMembers.contains(member)) {
+            checkedInMembers.remove(member);
+            currentCapacity--;
+            return "Successfully Checked-out\n";
+        } else {
+            return "You are not checked-in and therefore may not check out\n";
+        }
     }
 
     protected String ListCheckedInMembers() {

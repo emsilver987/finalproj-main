@@ -20,63 +20,95 @@ public class App {
     private static final long serialVersionUID = 0;
 
     public static void main(String[] args) throws Exception {
+        initializeCountryClub();
+        Member member = obtainMemberDetails();
+        theCountryClub.Serialize();
+        if (member != null) {
+            if (member.getNumber() == 1) {
+                handleAdminLogin();
+            } else {
+                handleMemberFacilityChoice(member);
+            }
+        } else {
+            System.out.println("Member not found. Please enter a number 1-100");
+            main(null); // Recursive call for retry
+        }
+    }
+
+    private static void initializeCountryClub() throws Exception {
         if (theCountryClub == null) {
-        theCountryClub = CountryClub.Deserialize();
+            theCountryClub = CountryClub.Deserialize();
             if (theCountryClub == null) {
                 theCountryClub = new CountryClub();
                 initializeMembers();
             }
         }
-        Member member = obtainMemberDetails();
-        theCountryClub.Serialize();
-        if (member != null) {
-            if (member.getNumber() == 1) {
-                adminLoginFunc();
-                int adminPassword = scanner.nextInt();
-                if (adminPassword == 12345) {
-                    adminMessgaeFunc();
-                    int adminChoice = scanner.nextInt();
-                    Response adminUserResponse = Response.fromInt(adminChoice);
-                    if (adminUserResponse != null) {
-                        switch (adminUserResponse) {
-                            case Gym:
-                                System.err.println(theCountryClub.gym.WelcomeMessage());
-                                System.err.println(theCountryClub.gym.WorkHours());
-                                System.out.print("The current checked in members include:\n" + theCountryClub.gym.ListCheckedInMembers());
-                                break;
-                            case Pool:
-                                System.err.println(theCountryClub.pool.WelcomeMessage());
-                                System.err.println(theCountryClub.pool.WorkHours());
-                                System.out.print("The current checked in members include:\n" + theCountryClub.pool.ListCheckedInMembers());
-                                break;
-                            case RestaurantCheckin:
-                                System.err.println(theCountryClub.restaurant.WelcomeMessage());
-                                System.err.println(theCountryClub.restaurant.WorkHours());
-                                System.out.print("The current checked in members include:\n" + theCountryClub.restaurant.ListCheckedInMembers());
-                                break;
-                            default:
-                                break;
-                        }
-                    } else {
-                        System.out.println("Invalid response, Please enter one of the Specfied Numbers.");
-                        main(null);
-                    }
-                    Gym thegym = new Gym(10);
-                    thegym.ListCheckedInMembers();
-                    theCountryClub.Serialize();
-                } else {
-                    System.out.println("Incorrect admin password. Please log-in again");
-                    main(null);
-                }
-            } else {
-                FacilityChoice(member);
-            }
+    }
+
+    private static void handleAdminLogin() throws Exception {
+        adminLoginFunc();
+        int adminPassword = scanner.nextInt();
+        if (adminPassword == 12345) {
+            processAdminActions();
         } else {
-            System.out.println("Member not found. Please enter a number 1-100");
-            main(null);
+            System.out.println("Incorrect admin password. Please log-in again");
+            main(null); // Recursive call for retry
         }
     }
 
+    private static void processAdminActions() throws Exception {
+        adminMessageFunc();
+        int adminChoice = scanner.nextInt();
+        Response adminUserResponse = Response.fromInt(adminChoice);
+        if (adminUserResponse != null) {
+            handleAdminChoice(adminUserResponse);
+        } else {
+            System.out.println("Invalid response, Please enter one of the Specified Numbers.");
+            main(null); // Recursive call for retry
+        }
+    }
+
+    private static void handleAdminChoice(Response adminUserResponse) throws Exception {
+        switch (adminUserResponse) {
+            case Gym:
+                handleGymAdminActions();
+                break;
+            case Pool:
+                handlePoolAdminActions();
+                break;
+            case RestaurantCheckin:
+                handleRestaurantAdminActions();
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                break;
+        }
+        theCountryClub.Serialize();
+    }
+
+    private static void handleGymAdminActions() {
+        System.err.println(theCountryClub.gym.WelcomeMessage());
+        System.err.println(theCountryClub.gym.WorkHours());
+        System.out.print("The current checked in members include:\n" + theCountryClub.gym.ListCheckedInMembers());
+    }
+
+    private static void handlePoolAdminActions() {
+        System.err.println(theCountryClub.pool.WelcomeMessage());
+        System.err.println(theCountryClub.pool.WorkHours());
+        System.out.print("The current checked in members include:\n" + theCountryClub.pool.ListCheckedInMembers());
+    }
+
+    private static void handleRestaurantAdminActions() {
+        System.err.println(theCountryClub.restaurant.WelcomeMessage());
+        System.err.println(theCountryClub.restaurant.WorkHours());
+        System.out.print("The current checked in members include:\n" + theCountryClub.restaurant.ListCheckedInMembers());
+    }
+
+
+    private static void handleMemberFacilityChoice(Member member) throws Exception {
+        FacilityChoice(member);
+    }
+    
     private static void initializeMembers() {
             list.addAll(Arrays.asList(
             new Member(1, "Charles Rodriguez"),
@@ -190,91 +222,113 @@ public class App {
     }
 
     public static void FacilityChoice(Member member) throws Exception {
-        facilityChoicePrintFunction();
+        printFacilityOptions();
         int facilityChoice = scanner.nextInt();
+        handleFacilityChoice(facilityChoice, member);
+    }
+
+    private static void printFacilityOptions() {
+        facilityChoicePrintFunction();
+    }
+
+    private static void handleFacilityChoice(int facilityChoice, Member member) throws Exception {
         Response userResponse = Response.fromInt(facilityChoice);
         if (userResponse != null) {
             System.out.println("Hello " + member.getName() + " (Member " + member.getNumber() + "), Welcome to the " + userResponse);
             switch (userResponse) {
                 case Gym:
-                    System.out.print(theCountryClub.gym.Options());
-                    int gymChoice = scanner.nextInt();
-                    if (gymChoice == 1){
-                        System.out.print(theCountryClub.gym.Checkin(member));
-                        theCountryClub.Serialize();
-                        main(null);
-                    }
-                    if (gymChoice == 2){
-                        System.out.print(theCountryClub.gym.Checkout(member));
-                        theCountryClub.Serialize();
-                        main(null);
-                    }
-                    if (gymChoice == 3){
-                        System.out.print(theCountryClub.gym.WorkHours());
-                        main(null);
-                    }
+                    handleGymChoice(member);
                     break;
                 case Pool:
-                    System.out.print(theCountryClub.pool.Options());
-                    int poolChoice = scanner.nextInt();
-                    if (poolChoice == 1){
-                        System.out.print(theCountryClub.pool.Checkin(member));
-                        theCountryClub.Serialize();
-                        main(null);
-                    }
-                    if (poolChoice == 2){
-                        System.out.print(theCountryClub.pool.Checkout(member));
-                        theCountryClub.Serialize();
-                        main(null);
-                    }
-                    if (poolChoice == 3){
-                        System.out.print(theCountryClub.pool.WorkHours());
-                        main(null);
-                    }
+                    handlePoolChoice(member);
                     break;
                 case RestaurantCheckin:
-                    System.out.print(theCountryClub.pool.Options());
-                    int restaurantChoice = scanner.nextInt();
-                    if (restaurantChoice == 1){
-                        System.out.print(theCountryClub.pool.Checkin(member));
-                        theCountryClub.Serialize();
-                        main(null);
-                    }
-                    if (restaurantChoice == 2){
-                        System.out.print(theCountryClub.restaurant.Checkout(member));
-                        theCountryClub.Serialize();
-                        main(null);
-                    }
-                    if (restaurantChoice == 3){
-                        System.out.print(theCountryClub.restaurant.WorkHours());
-                        main(null);
-                    }
-                    break;
                 case RestaurantReservation:
-                    howMany();
-                    int howManyInPartyint = scanner.nextInt();
-                    reservationDate();
-                    int reservationDate = scanner.nextInt();
-                    System.out.print(theCountryClub.restaurant.MakeReservation(reservationDate, member, howManyInPartyint));
-                    theCountryClub.Serialize();
-                    main(null);
+                    handleRestaurantChoice(facilityChoice, member);
                     break;
                 case OrderTakeout:
-                    System.out.println(theCountryClub.restaurant.menuOptions());
-                    int foodChoice = scanner.nextInt();
-                    System.out.println(theCountryClub.restaurant.quantity());
-                    int quantity = scanner.nextInt();
-                    System.out.println(theCountryClub.restaurant.order(foodChoice, quantity));
-                    main(null);
+                    handleOrderTakeout(member);
                     break;
             }
-        }
-        else {
-            System.out.println("Invalid response, Please enter one of the Specfied Numbers.");
-            FacilityChoice(member);
+        } else {
+            handleInvalidResponse(member);
         }
     }
-    
+    private static void handleGymChoice(Member member) throws Exception {
+        System.out.print(theCountryClub.gym.Options());
+        int gymChoice = scanner.nextInt();
+        switch (gymChoice) {
+            case 1:
+                System.out.print(theCountryClub.gym.Checkin(member));
+                break;
+            case 2:
+                System.out.print(theCountryClub.gym.Checkout(member));
+                break;
+            case 3:
+                System.out.print(theCountryClub.gym.WorkHours());
+                break;
+            default:
+                handleInvalidResponse(member);
+                return;
+        }
+        theCountryClub.Serialize();
+        main(null);
+    }
+
+    private static void handlePoolChoice(Member member) throws Exception {
+        System.out.print(theCountryClub.pool.Options());
+        int poolChoice = scanner.nextInt();
+        switch (poolChoice) {
+            case 1:
+                System.out.print(theCountryClub.pool.Checkin(member));
+                break;
+            case 2:
+                System.out.print(theCountryClub.pool.Checkout(member));
+                break;
+            case 3:
+                System.out.print(theCountryClub.pool.WorkHours());
+                break;
+            default:
+                handleInvalidResponse(member);
+                return;
+        }
+        theCountryClub.Serialize();
+        main(null);
+    }
+
+    private static void handleRestaurantChoice(int restaurantChoice, Member member) throws Exception {
+        System.out.print(theCountryClub.restaurant.Options());
+        switch (restaurantChoice) {
+            case 1:
+                System.out.print(theCountryClub.restaurant.Checkin(member));
+                break;
+            case 2:
+                System.out.print(theCountryClub.restaurant.Checkout(member));
+                break;
+            case 3:
+                System.out.print(theCountryClub.restaurant.WorkHours());
+                break;
+            default:
+                handleInvalidResponse(member);
+                return;
+        }
+        theCountryClub.Serialize();
+        main(null);
+    }
+
+    private static void handleOrderTakeout(Member member) throws Exception {
+        System.out.println(theCountryClub.restaurant.menuOptions());
+        int foodChoice = scanner.nextInt();
+        System.out.println(theCountryClub.restaurant.quantity());
+        int quantity = scanner.nextInt();
+        System.out.println(theCountryClub.restaurant.order(foodChoice, quantity));
+        main(null);
+    }
+
+    private static void handleInvalidResponse(Member member) throws Exception {
+        System.out.println("Invalid response, Please enter one of the Specified Numbers.");
+        FacilityChoice(member);
+    }
 
     public enum Response {
         Gym(1),
@@ -316,7 +370,7 @@ public class App {
     public static void adminLoginFunc() {
         System.out.println(adminLogin);
     }
-    public static void adminMessgaeFunc() {
+    public static void adminMessageFunc() {
         System.out.println(adminMessgae);
     }
     public void adminLogin(){

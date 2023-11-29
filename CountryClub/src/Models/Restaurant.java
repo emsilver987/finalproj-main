@@ -7,7 +7,7 @@ import Interfaces.ICountryClubFacility;
 public class Restaurant extends CapacityCheckinBase implements ICountryClubFacility, Serializable {
     private static final long serialVersionUID = -5979258196644527672L;
     private final String welcomeMessage = "Welcome to Country Club Restaurant facility!";
-    private final String hoursOfOperation = "Mon: 11:00AM - 11:00PM\nTues 11:00AM - 11:00PM\nWend:11:00AM - 11:00PM\nThurs:11:00AM - 11:00PM\nFri:11:00AM - 11:00PM\nSat:11:00AM - 11:00PM\nSun:Closed";
+    private final String hoursOfOperation = "Mon: 11:00AM - 11:00PM\nTues 11:00AM - 11:00PM\nWend:11:00AM - 11:00PM\nThurs:11:00AM - 11:00PM\nFri:11:00AM - 11:00PM\nSat:11:00AM - 11:00PM\nSun:Closed\n";
     private final String food = "1 - Burger : $15\n2 - Fish Tacos : $25\n3 - Braised Beef Ragu : 30";
     private final String quanitityString = "How many would you like?";
     private final String optionsString = "What would you like to do today\n1 - Check in\n2 - Check out\n3 - See Hours\n";
