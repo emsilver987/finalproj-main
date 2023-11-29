@@ -7,4 +7,6 @@ public class Reservation implements Serializable{
     private Date dateOfReservation;
     private Member member;
     private int NumberOfGuests;
+
+    
 }

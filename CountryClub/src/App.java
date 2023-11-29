@@ -8,6 +8,7 @@ import java.util.Scanner;
 import Models.Gym;
 import Models.Member;
 
+
 public class App {
     private static final Scanner scanner = new Scanner(System.in);
     private static final List<Member> list = new ArrayList<>();
@@ -213,6 +214,14 @@ public class App {
                     System.out.print(theCountryClub.restaurant.MakeReservation(reservationDate, member, howManyInPartyint));
                     theCountryClub.Serialize();
                     break;
+                case OrderTakeout:
+                    System.out.println(theCountryClub.restaurant.menuOptions());
+                    int foodChoice = scanner.nextInt();
+                    System.out.println(theCountryClub.restaurant.quantity());
+                    int quantity = scanner.nextInt();
+
+                    theCountryClub.Serialize();
+                    break;
             }
         } else {
             System.out.println("Invalid response");
@@ -224,7 +233,8 @@ public class App {
         Gym(1),
         Pool(2),
         RestaurantCheckin(3),
-        RestaurantReservation(4);
+        RestaurantReservation(4),
+        OrderTakeout(5);
 
         private final int value;
 
