@@ -243,6 +243,7 @@ public class App {
                     handlePoolChoice(member);
                     break;
                 case RestaurantCheckin:
+                    theCountryClub.restaurant.Checkin(member);
                 case RestaurantReservation:
                     handleRestaurantChoice(facilityChoice, member);
                     break;
@@ -272,7 +273,7 @@ public class App {
                 return;
         }
         theCountryClub.Serialize();
-        main(null);
+        handleFacilityChoice(1, member);
     }
 
     private static void handlePoolChoice(Member member) throws Exception {
@@ -293,12 +294,13 @@ public class App {
                 return;
         }
         theCountryClub.Serialize();
-        main(null);
+        handleFacilityChoice(2, member);
     }
 
     private static void handleRestaurantChoice(int restaurantChoice, Member member) throws Exception {
         System.out.print(theCountryClub.restaurant.Options());
-        switch (restaurantChoice) {
+        int restaurantChoice1 = scanner.nextInt();
+        switch (restaurantChoice1) {
             case 1:
                 System.out.print(theCountryClub.restaurant.Checkin(member));
                 break;
@@ -313,7 +315,7 @@ public class App {
                 return;
         }
         theCountryClub.Serialize();
-        main(null);
+        handleFacilityChoice(3, member);
     }
 
     private static void handleOrderTakeout(Member member) throws Exception {
@@ -322,7 +324,7 @@ public class App {
         System.out.println(theCountryClub.restaurant.quantity());
         int quantity = scanner.nextInt();
         System.out.println(theCountryClub.restaurant.order(foodChoice, quantity));
-        main(null);
+        FacilityChoice(member);
     }
 
     private static void handleInvalidResponse(Member member) throws Exception {
