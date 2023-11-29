@@ -19,7 +19,7 @@ JAVAC_FLAGS = -d $(BUILD_DIR) -cp $(SOURCE_DIR)
 MAIN_CLASS = App
 
 # Phony targets for make commands
-.PHONY: all run run-exception clean
+.PHONY: all run run-exception jar clean
 
 # Detect the operating system and set the appropriate clean command
 ifeq ($(OS),Windows_NT)
@@ -43,6 +43,10 @@ $(BUILD_DIR):
 # Rule to run the application
 run: all
 	$(JAVA) -cp $(BUILD_DIR) $(MAIN_CLASS)
+
+# Rule to create a JAR file
+jar: $(CLASS_FILES)
+	jar cvf program.jar -C $(BUILD_DIR) .
 
 # Rule to clean the build directory
 clean:
