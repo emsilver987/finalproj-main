@@ -19,6 +19,7 @@ public class App {
     private final static String welcomeMessage ="Welcome to Silverthorne Country Club\nIt's great to see you\nPlease enter your Member Number: ";
     private final static String adminLogin ="Welcome Mr.Rodriguez Please enter your Admin Password to continue";
     private final static String adminMessgae ="What facility would you like to view the checked-in members?\nGym = 1\nPool = 2\nRestaurant = 3";
+    private static final long serialVersionUID = 0;
 
     public static void main(String[] args) throws Exception {
         if (theCountryClub == null) {
@@ -59,19 +60,20 @@ public class App {
                                 break;
                         }
                     } else {
-                        System.out.println("Invalid response");
+                        System.out.println("Invalid response, Please enter one of the Specfied Numbers.");
                     }
                     Gym thegym = new Gym(10);
                     thegym.ListCheckedInMembers();
                     theCountryClub.Serialize();
                 } else {
-                    System.out.println("Incorrect admin password.");
+                    System.out.println("Incorrect admin password. Please log-in again");
                 }
             } else {
                 FacilityChoice(member);
             }
         } else {
-            System.out.println("Member not found.");
+            System.out.println("Member not found. Please enter a number 1-100");
+            main(null);
         }
     }
 
@@ -195,16 +197,49 @@ public class App {
             System.out.println("Hello " + member.getName() + " (Member " + member.getNumber() + "), Welcome to the " + userResponse);
             switch (userResponse) {
                 case Gym:
-                    System.out.print(theCountryClub.gym.Checkin(member));
-                    theCountryClub.Serialize();
+                    System.out.print(theCountryClub.gym.Options());
+                    int gymChoice = scanner.nextInt();
+                    if (gymChoice == 1){
+                        System.out.print(theCountryClub.gym.Checkin(member));
+                        theCountryClub.Serialize();
+                    }
+                    if (gymChoice == 2){
+                        System.out.print(theCountryClub.gym.Checkout(member));
+                        theCountryClub.Serialize();
+                    }
+                    if (gymChoice == 3){
+                        System.out.print(theCountryClub.gym.WorkHours());
+                    }
                     break;
                 case Pool:
-                    System.out.print(theCountryClub.pool.Checkin(member));
-                    theCountryClub.Serialize();
+                    System.out.print(theCountryClub.pool.Options());
+                    int poolChoice = scanner.nextInt();
+                    if (poolChoice == 1){
+                        System.out.print(theCountryClub.pool.Checkin(member));
+                        theCountryClub.Serialize();
+                    }
+                    if (poolChoice == 2){
+                        System.out.print(theCountryClub.pool.Checkout(member));
+                        theCountryClub.Serialize();
+                    }
+                    if (poolChoice == 3){
+                        System.out.print(theCountryClub.pool.WorkHours());
+                    }
                     break;
                 case RestaurantCheckin:
-                    System.out.print(theCountryClub.restaurant.Checkin(member));
-                    theCountryClub.Serialize();
+                    System.out.print(theCountryClub.pool.Options());
+                    int restaurantChoice = scanner.nextInt();
+                    if (restaurantChoice == 1){
+                        System.out.print(theCountryClub.pool.Checkin(member));
+                        theCountryClub.Serialize();
+                    }
+                    if (restaurantChoice == 2){
+                        System.out.print(theCountryClub.restaurant.Checkout(member));
+                        theCountryClub.Serialize();
+                    }
+                    if (restaurantChoice == 3){
+                        System.out.print(theCountryClub.restaurant.WorkHours());
+                    }
                     break;
                 case RestaurantReservation:
                     howMany();
@@ -224,7 +259,8 @@ public class App {
             }
         }
         else {
-            System.out.println("Invalid response");
+            System.out.println("Invalid response, Please enter one of the Specfied Numbers.");
+            FacilityChoice(member);
         }
     }
     

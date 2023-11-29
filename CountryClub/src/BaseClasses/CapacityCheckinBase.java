@@ -10,6 +10,7 @@ public class CapacityCheckinBase implements ICheckin, Serializable {
     private int currentCapacity = 0;
     private int maxCapacity = 10;
     private List<Member> checkedInMembers = new ArrayList<>();
+    private static final long serialVersionUID = 0;
 
     public CapacityCheckinBase(int maxCapacity) {
         this.maxCapacity = maxCapacity;
@@ -20,10 +21,16 @@ public class CapacityCheckinBase implements ICheckin, Serializable {
         if (currentCapacity < maxCapacity) {
             checkedInMembers.add(member);
             currentCapacity++;
-            return "Success";
+            return "Successfly Checked-in";
         } else {
             return "Capacity is full. Cannot check in more members.";
         }
+    }
+
+    public String Checkout(Member member) {
+            checkedInMembers.remove(member);
+            currentCapacity--;
+            return "Successfully Checked-out";
     }
 
     protected String ListCheckedInMembers() {

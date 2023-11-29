@@ -19,6 +19,7 @@ public class CountryClub implements Serializable {
     public Pool pool;
     public Restaurant restaurant;
     public List<Member> Members = new ArrayList<Member>();
+    private static final long serialVersionUID = 0;
     public CountryClub(){
         gym = new Gym(10);
         pool = new Pool(20);
