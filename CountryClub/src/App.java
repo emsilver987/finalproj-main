@@ -31,7 +31,7 @@ public class App {
             }
         } else {
             System.out.println("Member not found. Please enter a number 1-100");
-            main(null); // Recursive call for retry
+            main(null);
         }
     }
 
@@ -52,7 +52,7 @@ public class App {
             processAdminActions();
         } else {
             System.out.println("Incorrect admin password. Please log-in again");
-            main(null); // Recursive call for retry
+            main(null);
         }
     }
 
@@ -64,7 +64,7 @@ public class App {
             handleAdminChoice(adminUserResponse);
         } else {
             System.out.println("Invalid response, Please enter one of the Specified Numbers.");
-            main(null); // Recursive call for retry
+            main(null);
         }
     }
 
