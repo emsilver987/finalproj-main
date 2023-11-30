@@ -238,14 +238,17 @@ public class App {
             switch (userResponse) {
                 case Gym:
                     handleGymChoice(member);
+                    theCountryClub.Serialize();
                     break;
                 case Pool:
                     handlePoolChoice(member);
+                    theCountryClub.Serialize();
                     break;
                 case RestaurantCheckin:
-                    theCountryClub.restaurant.Checkin(member);
+                    handleRestaurantChoice(member);
+                    theCountryClub.Serialize();
                 case RestaurantReservation:
-                    handleRestaurantChoice(facilityChoice, member);
+                    handleReservation(member);
                     break;
                 case OrderTakeout:
                     handleOrderTakeout(member);
@@ -297,7 +300,16 @@ public class App {
         handleFacilityChoice(2, member);
     }
 
-    private static void handleRestaurantChoice(int restaurantChoice, Member member) throws Exception {
+    private static void handleReservation(Member member) throws Exception {
+        howMany();
+        int howManyInPartyInt = scanner.nextInt();
+        reservationDate();
+        int reservationDateString = scanner.nextInt();
+        System.out.println(theCountryClub.restaurant.MakeReservation(reservationDateString, member, howManyInPartyInt));
+    }
+
+
+    private static void handleRestaurantChoice(Member member) throws Exception {
         System.out.print(theCountryClub.restaurant.Options());
         int restaurantChoice1 = scanner.nextInt();
         switch (restaurantChoice1) {
@@ -319,12 +331,7 @@ public class App {
     }
 
     private static void handleOrderTakeout(Member member) throws Exception {
-        System.out.println(theCountryClub.restaurant.menuOptions());
-        int foodChoice = scanner.nextInt();
-        System.out.println(theCountryClub.restaurant.quantity());
-        int quantity = scanner.nextInt();
-        System.out.println(theCountryClub.restaurant.order(foodChoice, quantity));
-        FacilityChoice(member);
+        theCountryClub.restaurant.makeOrder();
     }
 
     private static void handleInvalidResponse(Member member) throws Exception {
@@ -374,9 +381,6 @@ public class App {
     }
     public static void adminMessageFunc() {
         System.out.println(adminMessgae);
-    }
-    public void adminLogin(){
-
     }
 }
 

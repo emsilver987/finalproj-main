@@ -31,7 +31,7 @@ public class CapacityCheckinBase implements ICheckin, Serializable {
         }
 
         if (currentCapacity < maxCapacity) {
-            // checkedInMembers.add(member);
+            checkedInMembers.add(member);
             currentCapacity++;
             return "Successfully Checked-in\n";
         } else {

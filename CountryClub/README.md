@@ -1,30 +1,39 @@
 # Country Club Management System
 
 ## Project Overview
-This project is inspired by my personal experience working at a country club. The goal is to create a system similar to the one used at the country club, enhancing operational efficiency and member experience.
+This project, inspired by real-world experience working at a country club, aims to create a system that enhances operational efficiency and the member experience. The system provides separate functionalities for admin and club members.
 
-## Features
+### Admin Functions
+- **View Current Check-ins**: Admin can view members currently checked in at the gym, pool, or restaurant.
+- **Display Facility Hours**: Shows the operating hours for each facility.
+- **Manage Member Information**: Access and edit member details.
 
-### Admin Account
-- **User ID:** 1 (ADMIN)
-- **Password:** 12345
-- **Privileges:** Full administrative access to the system.
+### Member Functions
+- **Check-In/Check-Out**: For the gym, pool, or restaurant.
+- **View Facility Hours**: Members can see the operating hours of each facility.
+- **Make Reservations**: For dining at the restaurant.
+- **Order Take-Out**: From the restaurant menu.
 
-### Member Accounts
-- **User IDs:** 2 - 100 (for individual members)
-- **Privileges:** Members can access various options in the provided menus to utilize the club's facilities and services.
+## Technical Considerations
+- **Database Management**: To store member data, reservations, and check-in records.
+- **Security Measures**: Protect member information and system integrity.
 
-## User Guide
+## User Authentication
+- **Admin Login**: UserID: 1, Password: 12345
+- **Member Login**: UserIDs: 2 - 100
 
-### Admin Access
-- Login with the ADMIN account to manage club operations, member information, and system settings.
+## Additional Features
+- **Feedback System**: For members and staff to provide feedback and suggestions.
+- **Error Handling**: For issues like needing to "Make Run" twice.
 
-### Member Access
-- Members can log in with their respective IDs to explore and use the services offered by the club.
+## Development and Testing
+- Regular updates based on user feedback.
+- Involvement of staff and members in the testing phase.
 
-## Feedback and Contributions
-Members and staff are encouraged to provide feedback for continuous improvement of the system. Contributions to the system's development are also welcome.
+## Documentation and Support
+- **User Guides**: Detailed guides for both admin and members.
+- **Technical Support**: Guidelines for troubleshooting.
 
 ---
 
-_This system aims to replicate the real-world functionalities of a country club, ensuring a seamless and enjoyable experience for all users._
+_This system is designed to replicate the functionalities of a country club, ensuring a seamless experience for all users._
