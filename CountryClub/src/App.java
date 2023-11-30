@@ -22,7 +22,6 @@ public class App {
     public static void main(String[] args) throws Exception {
         initializeCountryClub();
         Member member = obtainMemberDetails();
-        theCountryClub.Serialize();
         if (member != null) {
             if (member.getNumber() == 1) {
                 handleAdminLogin();

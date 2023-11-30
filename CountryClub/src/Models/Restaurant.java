@@ -117,4 +117,14 @@ public class Restaurant extends CapacityCheckinBase implements ICountryClubFacil
         WelcomeMessage();
         return optionsString;
     }
+    
+    @Override
+    protected void initializeHours() {
+        hoursOfOperationMap.put("MONDAY", new String[] { "09:00", "23:00" });
+        hoursOfOperationMap.put("TUESDAY", new String[] { "09:00", "23:00" });
+        hoursOfOperationMap.put("WEDNESDAY", new String[] { "09:00", "23:00" });
+        hoursOfOperationMap.put("THURSDAY", new String[] { "09:00", "23:00" });
+        hoursOfOperationMap.put("FRIDAY", new String[] { "09:00", "23:00" });
+        hoursOfOperationMap.put("SATURDAY", new String[] { "11:00", "23:00" });
+    }
 }

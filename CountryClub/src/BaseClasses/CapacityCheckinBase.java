@@ -11,16 +11,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CapacityCheckinBase implements ICheckin, Serializable {
+public abstract class CapacityCheckinBase implements ICheckin, Serializable {
     private int currentCapacity = 0;
     private int maxCapacity = 10;
     private List<Member> checkedInMembers = new ArrayList<>();
     private static final long serialVersionUID = 0;
-    private final Map<String, String[]> hoursOfOperation;
+    protected final Map<String, String[]> hoursOfOperationMap;
 
     public CapacityCheckinBase(int maxCapacity) {
         this.maxCapacity = maxCapacity;
-        this.hoursOfOperation = new HashMap<>();
+        this.hoursOfOperationMap = new HashMap<>();
         initializeHours();
     }
 
@@ -57,23 +57,16 @@ public class CapacityCheckinBase implements ICheckin, Serializable {
         return result.toString();
     }
 
-    private void initializeHours() {
-        hoursOfOperation.put("MONDAY", new String[]{"09:00", "23:00"});
-        hoursOfOperation.put("TUESDAY", new String[]{"09:00", "23:00"});
-        hoursOfOperation.put("WEDNESDAY", new String[]{"09:00", "23:00"});
-        hoursOfOperation.put("THURSDAY", new String[]{"09:00", "23:00"});
-        hoursOfOperation.put("FRIDAY", new String[]{"09:00", "23:00"});
-        hoursOfOperation.put("SATURDAY", new String[]{"11:00", "23:00"});
-        // Closed on Sundays
-    }
+    protected abstract void initializeHours();
+
     private boolean canCheckInNow() {
         LocalDateTime now = LocalDateTime.now();
         String dayOfWeek = now.getDayOfWeek().toString();
-        if (!hoursOfOperation.containsKey(dayOfWeek)) {
+        if (!hoursOfOperationMap.containsKey(dayOfWeek)) {
             return false; // Club is closed today
         }
 
-        String[] operationHours = hoursOfOperation.get(dayOfWeek);
+        String[] operationHours = hoursOfOperationMap.get(dayOfWeek);
         LocalDateTime openTime = LocalDateTime.parse(now.toLocalDate().toString() + "T" + operationHours[0] + ":00");
         LocalDateTime closeTime = LocalDateTime.parse(now.toLocalDate().toString() + "T" + operationHours[1] + ":00");
 
