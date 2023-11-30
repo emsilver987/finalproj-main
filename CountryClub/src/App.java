@@ -217,8 +217,8 @@ public class App {
 
     public static Member obtainMemberDetails() {
         welcomeMessage();
-        int memberNumber = scanner.nextInt();
-        return theCountryClub.Members.stream().filter(m -> m.getNumber() == memberNumber).findFirst().orElse(null);
+        int memberNum = scanner.nextInt();
+        return theCountryClub.Members.stream().filter(m -> m.getNumber() == memberNum).findFirst().orElse(null);
     }
 
     public static void FacilityChoice(Member member) throws Exception {
