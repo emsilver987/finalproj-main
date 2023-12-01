@@ -11,7 +11,7 @@ public class Restaurant extends CapacityCheckinBase implements ICountryClubFacil
     private final String welcomeMessage = "Welcome to Country Club Restaurant facility!";
     private final String food = "1 - Burger : $15\n2 - Fish Tacos : $25\n3 - Braised Beef Ragu : $30";
     private final String quantityString = "How many would you like?";
-    private final String optionsString = "What would you like to do today\n1 - Check in\n2 - Check out\n3 - See Hours\n4 - Back to Facility Choice";
+    private final String optionsString = "What would you like to do today\n1 - Check in\n2 - Check out\n3 - See Hours\n4 - Back to Facility Choice\n";
 
     public Restaurant(int capacity) {
         super(capacity);
@@ -31,7 +31,7 @@ public class Restaurant extends CapacityCheckinBase implements ICountryClubFacil
     public void WorkHours() {
         for (String day : hoursOfOperationMap.keySet()) {
             String[] hours = hoursOfOperationMap.get(day);
-            System.out.print(day + ": " + hours[0] + " to " + hours[1]);
+            System.out.println(day + ": " + hours[0] + " to " + hours[1]);
         }
     }
 

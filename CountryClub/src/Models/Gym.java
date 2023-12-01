@@ -6,8 +6,7 @@ import java.io.Serializable;
 
 public class Gym extends CapacityCheckinBase implements ICountryClubFacility, Serializable {
     private final String welcomeMessage = "Welcome to Country Club gym facility!";
-    //private final String hoursOfOperation = "Mon: 9:00AM - 11:00PM\nTues:9:00AM - 11:00PM\nWend:9:00AM - 11:00PM\nThurs:9:00AM - 11:00PM\nFri:9:00AM - 11:00PM\nSat:11:00AM - 11:00PM\nSun:Closed\n";
-    private final String optionsString = "What would you like to do today\n1 - Check in\n2 - Check out\n3 - See Hours\n4 - Back to Facility Choice";
+    private final String optionsString = "What would you like to do today\n1 - Check in\n2 - Check out\n3 - See Hours\n4 - Back to Facility Choice\n";
 
     public Gym(int capacity) {
         super(capacity);
@@ -27,7 +26,7 @@ public class Gym extends CapacityCheckinBase implements ICountryClubFacility, Se
     public void WorkHours() {
         for (String day : hoursOfOperationMap.keySet()) {
             String[] hours = hoursOfOperationMap.get(day);
-            System.out.print(day + ": " + hours[0] + " to " + hours[1]);
+            System.out.println(day + ": " + hours[0] + " to " + hours[1] + " ");
         }
     }
 

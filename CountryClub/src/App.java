@@ -13,7 +13,7 @@ public class App {
     private static CountryClub theCountryClub;
     private final static String howManyInParty = "How many will be in your party?";
     private final static String reservationDate = "Date of reservation? Please enter month, day, and time\nFormat: Novemeber 9th at 915pm = 11092115";
-    private final static String faiclityChoicePrint ="What Facility Would you like to visit today?\nGym = 1\nPool = 2\nRestaurant = 3\nMake Reservation At Resturant = 4\nOrder Takeout = 5\nLogout = 6";
+    private final static String faiclityChoicePrint ="What Facility Would you like to visit today?\nGym = 1\nPool = 2\nRestaurant = 3\nMake Reservation At Restaurant = 4\nOrder Takeout = 5\nLogout = 6";
     private final static String welcomeMessage ="Welcome to Silverthorne Country Club\nIt's great to see you\nPlease enter your Member Number: ";
     private final static String adminLogin ="Welcome Mr.Rodriguez Please enter your Admin Password to continue";
     private final static String adminMessgae ="What facility would you like to view the checked-in members?\nGym = 1\nPool = 2\nRestaurant = 3";
