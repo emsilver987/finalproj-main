@@ -13,10 +13,14 @@ public class App {
     private static CountryClub theCountryClub;
     private final static String howManyInParty = "How many will be in your party?";
     private final static String reservationDate = "Date of reservation? Please enter month, day, and time\nFormat: Novemeber 9th at 915pm = 11092115";
-    private final static String faiclityChoicePrint ="What Facility Would you like to visit today?\nGym = 1\nPool = 2\nRestaurant = 3\nMake Reservation At Resturant = 4\nOrder Takeout = 5";
+    private final static String faiclityChoicePrint ="What Facility Would you like to visit today?\nGym = 1\nPool = 2\nRestaurant = 3\nMake Reservation At Resturant = 4\nOrder Takeout = 5\nLogout = 6";
     private final static String welcomeMessage ="Welcome to Silverthorne Country Club\nIt's great to see you\nPlease enter your Member Number: ";
     private final static String adminLogin ="Welcome Mr.Rodriguez Please enter your Admin Password to continue";
     private final static String adminMessgae ="What facility would you like to view the checked-in members?\nGym = 1\nPool = 2\nRestaurant = 3";
+    private final static String InvalidResponse = "Invalid response, Please enter one of the Specified Numbers.";
+    private final static String whosCheckedin = "The current checked in members include:\n";
+    private final static String memberNotFound = "Member not found. Please enter a number 1-100";
+    private final static String incorrectAdminPass = "Incorrect admin password. Please log-in again";
     private static final long serialVersionUID = 0;
 
     public static void main(String[] args) throws Exception {
@@ -29,7 +33,7 @@ public class App {
                 handleMemberFacilityChoice(member);
             }
         } else {
-            System.out.println("Member not found. Please enter a number 1-100");
+            System.out.println(memberNotFound);
             main(null);
         }
     }
@@ -50,7 +54,7 @@ public class App {
         if (adminPassword == 12345) {
             processAdminActions();
         } else {
-            System.out.println("Incorrect admin password. Please log-in again");
+            System.out.println(incorrectAdminPass);
             main(null);
         }
     }
@@ -62,7 +66,7 @@ public class App {
         if (adminUserResponse != null) {
             handleAdminChoice(adminUserResponse);
         } else {
-            System.out.println("Invalid response, Please enter one of the Specified Numbers.");
+            System.out.println( InvalidResponse );
             main(null);
         }
     }
@@ -79,7 +83,7 @@ public class App {
                 handleRestaurantAdminActions();
                 break;
             default:
-                System.out.println("Invalid choice. Please try again.");
+                System.out.println(InvalidResponse);
                 break;
         }
         theCountryClub.Serialize();
@@ -87,20 +91,20 @@ public class App {
 
     private static void handleGymAdminActions() {
         System.err.println(theCountryClub.gym.WelcomeMessage());
-        System.err.println(theCountryClub.gym.WorkHours());
-        System.out.print("The current checked in members include:\n" + theCountryClub.gym.ListCheckedInMembers());
+        theCountryClub.gym.WorkHours();
+        System.out.print(whosCheckedin + theCountryClub.gym.ListCheckedInMembers());
     }
 
     private static void handlePoolAdminActions() {
         System.err.println(theCountryClub.pool.WelcomeMessage());
-        System.err.println(theCountryClub.pool.WorkHours());
-        System.out.print("The current checked in members include:\n" + theCountryClub.pool.ListCheckedInMembers());
+        theCountryClub.pool.WorkHours();
+        System.out.print(whosCheckedin + theCountryClub.pool.ListCheckedInMembers());
     }
 
     private static void handleRestaurantAdminActions() {
         System.err.println(theCountryClub.restaurant.WelcomeMessage());
-        System.err.println(theCountryClub.restaurant.WorkHours());
-        System.out.print("The current checked in members include:\n" + theCountryClub.restaurant.ListCheckedInMembers());
+        theCountryClub.restaurant.WorkHours();
+        System.out.print(whosCheckedin + theCountryClub.restaurant.ListCheckedInMembers());
     }
 
 
@@ -252,6 +256,8 @@ public class App {
                 case OrderTakeout:
                     handleOrderTakeout(member);
                     break;
+                case logoutScreen:
+                    break;
             }
         } else {
             handleInvalidResponse(member);
@@ -268,7 +274,10 @@ public class App {
                 System.out.print(theCountryClub.gym.Checkout(member));
                 break;
             case 3:
-                System.out.print(theCountryClub.gym.WorkHours());
+                theCountryClub.gym.WorkHours();
+                break;
+            case 4:
+                handleFacilityChoice(0, member);
                 break;
             default:
                 handleInvalidResponse(member);
@@ -289,7 +298,10 @@ public class App {
                 System.out.print(theCountryClub.pool.Checkout(member));
                 break;
             case 3:
-                System.out.print(theCountryClub.pool.WorkHours());
+                theCountryClub.pool.WorkHours();
+                break;
+            case 4:
+                handleFacilityChoice(0, member);
                 break;
             default:
                 handleInvalidResponse(member);
@@ -319,7 +331,10 @@ public class App {
                 System.out.print(theCountryClub.restaurant.Checkout(member));
                 break;
             case 3:
-                System.out.print(theCountryClub.restaurant.WorkHours());
+                theCountryClub.restaurant.WorkHours();
+                break;
+            case 4:
+                handleFacilityChoice(0, member);
                 break;
             default:
                 handleInvalidResponse(member);
@@ -334,7 +349,7 @@ public class App {
     }
 
     private static void handleInvalidResponse(Member member) throws Exception {
-        System.out.println("Invalid response, Please enter one of the Specified Numbers.");
+        System.out.println(InvalidResponse);
         FacilityChoice(member);
     }
 
@@ -343,7 +358,8 @@ public class App {
         Pool(2),
         RestaurantCheckin(3),
         RestaurantReservation(4),
-        OrderTakeout(5);
+        OrderTakeout(5),
+        logoutScreen(6);
 
         private final int value;
 

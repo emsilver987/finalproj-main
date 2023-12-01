@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Gym extends CapacityCheckinBase implements ICountryClubFacility, Serializable {
     private final String welcomeMessage = "Welcome to Country Club gym facility!";
     //private final String hoursOfOperation = "Mon: 9:00AM - 11:00PM\nTues:9:00AM - 11:00PM\nWend:9:00AM - 11:00PM\nThurs:9:00AM - 11:00PM\nFri:9:00AM - 11:00PM\nSat:11:00AM - 11:00PM\nSun:Closed\n";
-    private final String optionsString = "What would you like to do today\n1 - Check in\n2 - Check out\n3 - See Hours\n";
+    private final String optionsString = "What would you like to do today\n1 - Check in\n2 - Check out\n3 - See Hours\n4 - Back to Facility Choice";
 
     public Gym(int capacity) {
         super(capacity);
@@ -24,8 +24,11 @@ public class Gym extends CapacityCheckinBase implements ICountryClubFacility, Se
     }
 
     @Override
-    public String WorkHours() {
-        return hoursOfOperationMap.toString();
+    public void WorkHours() {
+        for (String day : hoursOfOperationMap.keySet()) {
+            String[] hours = hoursOfOperationMap.get(day);
+            System.out.print(day + ": " + hours[0] + " to " + hours[1]);
+        }
     }
 
     public String Options() {
@@ -35,12 +38,13 @@ public class Gym extends CapacityCheckinBase implements ICountryClubFacility, Se
 
     @Override
     protected void initializeHours() {
-        hoursOfOperationMap.put("MONDAY", new String[] { "09:00", "23:00" });
-        hoursOfOperationMap.put("TUESDAY", new String[] { "09:00", "23:00" });
-        hoursOfOperationMap.put("WEDNESDAY", new String[] { "09:00", "23:00" });
-        hoursOfOperationMap.put("THURSDAY", new String[] { "09:00", "23:00" });
-        hoursOfOperationMap.put("FRIDAY", new String[] { "09:00", "23:00" });
-        hoursOfOperationMap.put("SATURDAY", new String[] { "11:00", "23:00" });
+        hoursOfOperationMap.put("MONDAY", new String[] { "05:00", "23:00" });
+        hoursOfOperationMap.put("TUESDAY", new String[] { "05:00", "23:00" });
+        hoursOfOperationMap.put("WEDNESDAY", new String[] { "05:00", "23:00" });
+        hoursOfOperationMap.put("THURSDAY", new String[] { "05:00", "23:00" });
+        hoursOfOperationMap.put("FRIDAY", new String[] { "05:00", "23:00" });
+        hoursOfOperationMap.put("SATURDAY", new String[] { "5:00", "23:00" });
+        hoursOfOperationMap.put("Sunday", new String[] { "5:00", "14:00" });
     }
 
 }
